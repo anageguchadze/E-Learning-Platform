@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ question.title }}</title>
+</head>
+<body>
+    <h1>{{ question.title }}</h1>
+    <p>{{ question.content }}</p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit Answer</button>
+    </form>
+    <h2>Answers:</h2>
+    <ul>
+        {% for answer in question.answers.all %}
+            <li>{{ answer.user.username }}: {{ answer.text }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'forum' %}">Back to Forum</a>
+</body>
+</html>
